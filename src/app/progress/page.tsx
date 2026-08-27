@@ -21,7 +21,7 @@ export default function ProgressPage() {
   if (!hydrated) return null;
 
   return (
-    <AppShell topBar={<TopBar title="Progress" />}>
+    <AppShell topBar={<TopBar />}>
       <div className="px-6 py-6 flex flex-col gap-6 pb-24">
         {subjects.map((s) => {
           const predicted = predictedLevel(s, sessionLogs);
@@ -35,7 +35,7 @@ export default function ProgressPage() {
           const dt = daysUntil(s.examDate);
 
           return (
-            <div key={s.id} className="rounded-2xl border p-4 flex flex-col gap-4" style={{ borderColor: "var(--stone-border)" }}>
+            <div key={s.id} className="rounded-[24px] border p-4 flex flex-col gap-4" style={{ borderColor: "var(--stone-border)" }}>
               <div className="flex items-center justify-between">
                 <div>
                   <span className="font-bold" style={{ color: "var(--fg-default)" }}>{s.name}</span>
@@ -46,9 +46,9 @@ export default function ProgressPage() {
                 <ProgressRing
                   value={predicted}
                   size={80}
-                  strokeWidth={8}
+                  stroke={8}
                   color={ahead ? "var(--ahead-fill)" : s.color}
-                  label={`${predicted}`}
+                  label=""
                 />
               </div>
               <div>

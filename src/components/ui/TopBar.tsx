@@ -1,5 +1,7 @@
 "use client";
 
+// Ported verbatim from the design handoff's ganzy-components.jsx TopBar.
+
 import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useGanzy } from "@/lib/store";
@@ -24,18 +26,23 @@ export default function TopBar({
 
   return (
     <div
-      className="h-16 px-4 flex items-center justify-between border-b sticky top-0 z-20"
+      className="sticky top-0 z-20"
       style={{
+        height: 64,
+        padding: "0 16px",
         background: variant === "brand" ? "var(--bg-surface-cream)" : "var(--bg-surface)",
-        borderColor: "var(--stone-border)",
+        borderBottom: "1px solid var(--stone-border)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
-      <div className="flex items-center gap-2.5">
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         {showBack && (
           <button
             onClick={() => router.back()}
             aria-label="Back"
-            className="p-1 text-[var(--ganzy-orange)]"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 4, color: "var(--ganzy-orange)" }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6" />
@@ -43,19 +50,32 @@ export default function TopBar({
           </button>
         )}
         <span
-          className="font-bold text-xl tracking-[-0.02em]"
-          style={{ color: variant === "brand" ? "var(--ganzy-orange)" : "var(--fg-default)" }}
+          style={{
+            fontWeight: 700,
+            fontSize: 20,
+            color: variant === "brand" ? "var(--ganzy-orange)" : "var(--fg-default)",
+            letterSpacing: "-0.5px",
+          }}
         >
           {title}
         </span>
       </div>
-      <div className="flex items-center gap-2">
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         {showStreak && (
           <div
-            className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold"
-            style={{ background: "var(--ganzy-orange-soft)", color: "var(--ganzy-orange)" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              background: "var(--bg-accent-soft)",
+              padding: "4px 12px",
+              borderRadius: 9999,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--ganzy-orange)",
+            }}
           >
-            <span className="text-base">🔥</span>
+            <span style={{ fontSize: 16 }}>🔥</span>
             {streak}
           </div>
         )}

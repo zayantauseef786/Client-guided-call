@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useGanzy } from "@/lib/store";
 import { useHydrated } from "@/lib/useHydrated";
 import Button from "@/components/ui/Button";
-import TopBar from "@/components/ui/TopBar";
 import AppShell from "@/components/ui/AppShell";
 
 function SessionInner() {
@@ -36,7 +35,7 @@ function SessionInner() {
   if (!hydrated) return null;
   if (!block) {
     return (
-      <AppShell topBar={<TopBar title="Session" showStreak={false} />} nav={false}>
+      <AppShell nav={false}>
         <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6 text-center">
           <p style={{ color: "var(--fg-muted)" }}>This session block was not found.</p>
           <Button onClick={() => router.push("/dashboard")}>Back to plan</Button>
@@ -48,8 +47,17 @@ function SessionInner() {
   const durationMin = Math.round((block.endMin - block.startMin));
 
   return (
-    <AppShell topBar={<TopBar title="Ganzy" showStreak={false} showBack />} nav={false}>
-      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-5">
+    <AppShell nav={false}>
+      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-5 relative">
+        {phase !== "done" && (
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="absolute top-6 left-6 text-sm font-bold"
+            style={{ color: "var(--fg-subtle)" }}
+          >
+            interrupt session
+          </button>
+        )}
         {phase === "pre" && (
           <>
             <span className="text-xs font-bold uppercase tracking-[0.06em]" style={{ color: "var(--fg-subtle)" }}>Up next</span>
@@ -94,7 +102,7 @@ function SessionInner() {
               You covered {topics} topic{topics > 1 ? "s" : ""} in {Math.max(1, Math.round(elapsedSec / 60))} minutes.
             </h1>
             <p style={{ color: "var(--fg-muted)" }}>That&apos;s logged.</p>
-            <div className="rounded-2xl p-4 mt-2" style={{ background: "var(--bg-surface-cream)" }}>
+            <div className="rounded-[24px] p-4 mt-2" style={{ background: "var(--bg-surface-cream)" }}>
               <p className="text-lg font-bold" style={{ color: "var(--ganzy-orange)" }}>🔥 {streak.count} days</p>
               <p className="text-xs mt-1" style={{ color: "var(--fg-muted)" }}>
                 +1 today. Keep it alive tomorrow.

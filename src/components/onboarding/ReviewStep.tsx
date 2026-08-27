@@ -45,7 +45,7 @@ export default function ReviewStep({ subjects, availability, onBack, onBackToSub
         block stays adjustable afterward.
       </p>
 
-      <div className="rounded-2xl p-4" style={{ background: "var(--bg-surface-cream)" }}>
+      <div className="rounded-[24px] p-4" style={{ background: "var(--bg-surface-cream)" }}>
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-bold uppercase tracking-[0.06em]" style={{ color: "var(--fg-label)" }}>
             Plan feasibility

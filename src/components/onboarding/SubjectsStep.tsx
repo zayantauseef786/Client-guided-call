@@ -80,7 +80,7 @@ export default function SubjectsStep({ subjects, onAdd, onUpdate, onRemove, onCo
         {subjects.map((s) => (
           <div
             key={s.id}
-            className="rounded-2xl border p-4 flex flex-col gap-3"
+            className="rounded-[24px] border p-4 flex flex-col gap-3"
             style={{ borderColor: "var(--stone-border)", background: "var(--bg-surface)" }}
           >
             <div className="flex items-center justify-between">

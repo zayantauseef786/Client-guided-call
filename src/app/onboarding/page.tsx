@@ -42,15 +42,24 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen flex justify-center" style={{ background: "var(--bg-canvas)" }}>
       <div className="w-full max-w-[480px] min-h-screen flex flex-col" style={{ background: "var(--bg-page)" }}>
+        {step < 5 && (
+          <div
+            className="h-16 px-6 flex items-center border-b flex-shrink-0"
+            style={{ background: "var(--bg-surface-cream)", borderColor: "var(--stone-border)" }}
+          >
+            <span className="font-bold text-xl tracking-[-0.02em]" style={{ color: "var(--ganzy-orange)" }}>
+              Ganzy
+            </span>
+          </div>
+        )}
         {step === 0 && (
           <>
-            <div className="px-6 pt-10 pb-2">
-              <span className="text-2xl font-extrabold" style={{ color: "var(--ganzy-orange)" }}>Ganzy</span>
-              <h1 className="text-[28px] leading-tight font-bold mt-4" style={{ color: "var(--fg-default)" }}>
-                Let&apos;s get you set up
+            <div className="px-6 pt-6 pb-2">
+              <h1 className="text-[28px] leading-tight font-bold" style={{ color: "var(--fg-default)" }}>
+                Create your account
               </h1>
               <p className="text-base mt-2" style={{ color: "var(--fg-muted)" }}>
-                A study plan that adjusts to your real life.
+                Finally, a plan that actually fits your life. Less stress. More progress.
               </p>
             </div>
             <SignUpStep

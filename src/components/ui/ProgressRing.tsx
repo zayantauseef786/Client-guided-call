@@ -1,72 +1,77 @@
 "use client";
 
+// Ported verbatim from the design handoff's ganzy-components.jsx ProgressRing,
+// with an added mount-in animation (0 -> value) per the Rebuild Spec.
+
 import { useEffect, useState } from "react";
 
 interface Props {
   value: number; // 0-100
+  label?: string; // caption under the ring, e.g. "Predicted Score"
   size?: number;
-  strokeWidth?: number;
+  stroke?: number;
   color?: string;
-  trackColor?: string;
-  label?: string;
-  sublabel?: string;
+  track?: string;
 }
 
 export default function ProgressRing({
-  value,
-  size = 120,
-  strokeWidth = 10,
-  color = "var(--ganzy-orange)",
-  trackColor = "var(--stone-border)",
-  label,
-  sublabel,
+  value = 64,
+  label = "Predicted Score",
+  size = 110,
+  stroke = 8,
+  color,
+  track,
 }: Props) {
-  const [animated, setAnimated] = useState(0);
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
+  const resolvedColor = color || "var(--ganzy-orange)";
+  const resolvedTrack = track || "var(--bg-accent-soft)";
+  const r = size / 2 - stroke;
+  const c = 2 * Math.PI * r;
 
+  const [animated, setAnimated] = useState(0);
   useEffect(() => {
     const t = setTimeout(() => setAnimated(Math.max(0, Math.min(100, value))), 50);
     return () => clearTimeout(t);
   }, [value]);
 
-  const offset = circumference - (animated / 100) * circumference;
+  const off = c * (1 - animated / 100);
 
   return (
-    <div className="flex flex-col items-center gap-2" style={{ width: size }}>
-      <div className="relative" style={{ width: size, height: size }}>
-        <svg width={size} height={size} className="-rotate-90 absolute inset-0">
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+      <div style={{ position: "relative", width: size, height: size }}>
+        <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={resolvedTrack} strokeWidth={stroke} />
           <circle
             cx={size / 2}
             cy={size / 2}
-            r={radius}
-            stroke={trackColor}
-            strokeWidth={strokeWidth}
+            r={r}
             fill="none"
-          />
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            stroke={color}
-            strokeWidth={strokeWidth}
-            fill="none"
+            stroke={resolvedColor}
+            strokeWidth={stroke}
             strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
+            strokeDasharray={c}
+            strokeDashoffset={off}
             style={{ transition: "stroke-dashoffset 700ms cubic-bezier(0.2,0.8,0.2,1)" }}
           />
         </svg>
-        {label && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-2xl font-bold" style={{ color }}>
-              {label}
-            </span>
-          </div>
-        )}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 20,
+            fontWeight: 700,
+            color: resolvedColor,
+          }}
+        >
+          {value}%
+        </div>
       </div>
-      {sublabel && (
-        <span className="text-xs font-semibold text-[var(--fg-muted)] text-center">{sublabel}</span>
+      {label && (
+        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--ganzy-orange)", letterSpacing: 0.5, textTransform: "uppercase" }}>
+          {label}
+        </div>
       )}
     </div>
   );

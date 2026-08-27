@@ -24,7 +24,7 @@ export default function YouPage() {
   if (!hydrated) return null;
 
   return (
-    <AppShell topBar={<TopBar title="You" />}>
+    <AppShell topBar={<TopBar />}>
       <div className="px-6 py-6 flex flex-col gap-8 pb-24">
         <section className="flex items-center gap-4">
           <div
@@ -91,7 +91,7 @@ export default function YouPage() {
           <h2 className="text-xs font-bold uppercase tracking-[0.06em] mb-2" style={{ color: "var(--fg-label)" }}>
             Streak
           </h2>
-          <div className="rounded-2xl p-4 flex items-center justify-between" style={{ background: "var(--bg-surface-cream)" }}>
+          <div className="rounded-[24px] p-4 flex items-center justify-between" style={{ background: "var(--bg-surface-cream)" }}>
             <span className="text-lg font-bold" style={{ color: "var(--ganzy-orange)" }}>🔥 {streak.count} days</span>
             <span className="text-xs font-bold rounded-full px-3 py-1" style={{ background: "var(--ganzy-orange-soft)", color: "var(--ganzy-orange)" }}>
               🛡 {streak.freezesAvailable} freeze available
@@ -103,7 +103,7 @@ export default function YouPage() {
           <h2 className="text-xs font-bold uppercase tracking-[0.06em] mb-2" style={{ color: "var(--fg-label)" }}>
             Ganzy Plus
           </h2>
-          <div className="rounded-2xl border p-4 flex flex-col gap-3" style={{ borderColor: "var(--stone-border)" }}>
+          <div className="rounded-[24px] border p-4 flex flex-col gap-3" style={{ borderColor: "var(--stone-border)" }}>
             <p className="text-sm" style={{ color: "var(--fg-muted)" }}>
               {billing.plan === "none"
                 ? "Introductory price: $5 flat through August 20 — standard pricing applies after."

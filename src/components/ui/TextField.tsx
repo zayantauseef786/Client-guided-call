@@ -1,5 +1,7 @@
 "use client";
 
+// Ported verbatim from the design handoff's ganzy-components.jsx TextField.
+
 import { InputHTMLAttributes, ReactNode } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,31 +10,61 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   trailing?: ReactNode;
 }
 
-export default function TextField({ label, icon, trailing, className = "", ...rest }: Props) {
+export default function TextField({ label, icon, trailing, style, ...rest }: Props) {
   return (
-    <label className="flex flex-col gap-2 w-full">
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%" }}>
       {label && (
-        <span className="text-xs font-bold uppercase tracking-[0.06em] text-[var(--fg-label)]">
+        <span style={{ fontSize: 12, fontWeight: 700, color: "var(--fg-label)", letterSpacing: 0.2 }}>
           {label}
         </span>
       )}
-      <div className="relative flex items-center">
+      <div style={{ position: "relative" }}>
         {icon && (
-          <span className="absolute left-4 text-[var(--fg-subtle)] flex items-center">{icon}</span>
+          <span
+            style={{
+              position: "absolute",
+              left: 18,
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "var(--fg-muted)",
+              display: "flex",
+            }}
+          >
+            {icon}
+          </span>
         )}
         <input
-          className={[
-            "w-full rounded-2xl border border-[var(--stone-border-2)] bg-[var(--bg-surface)]",
-            "px-4 py-3 text-base text-[var(--fg-default)] placeholder:text-[var(--fg-subtle)]",
-            "focus:outline-none focus:border-[var(--ganzy-orange)] focus:ring-4 focus:ring-[var(--ganzy-orange-ring)]",
-            icon ? "pl-11" : "",
-            trailing ? "pr-11" : "",
-            className,
-          ].join(" ")}
           {...rest}
+          style={{
+            width: "100%",
+            boxSizing: "border-box",
+            background: "var(--neutral-150)",
+            border: "none",
+            borderRadius: 9999,
+            padding: icon ? "15px 48px" : "15px 20px",
+            fontFamily: "inherit",
+            fontSize: 16,
+            color: "var(--fg-default)",
+            outline: "none",
+            ...style,
+          }}
+          onFocus={(e) => (e.currentTarget.style.boxShadow = "var(--ring-focus)")}
+          onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
         />
-        {trailing && <span className="absolute right-4 flex items-center">{trailing}</span>}
+        {trailing && (
+          <span
+            style={{
+              position: "absolute",
+              right: 18,
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "var(--fg-muted)",
+            }}
+          >
+            {trailing}
+          </span>
+        )}
       </div>
-    </label>
+    </div>
   );
 }

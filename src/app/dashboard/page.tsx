@@ -95,7 +95,7 @@ export default function DashboardPage() {
     <AppShell topBar={<TopBar title="Ganzy" />}>
       <div className="pb-8">
         {wasAway && (
-          <div className="mx-6 mt-4 rounded-2xl p-4" style={{ background: "var(--bg-surface-cream)" }}>
+          <div className="mx-6 mt-4 rounded-[24px] p-4" style={{ background: "var(--bg-surface-cream)" }}>
             <p className="text-sm font-bold" style={{ color: "var(--fg-default)" }}>Welcome back</p>
             <p className="text-xs mt-1" style={{ color: "var(--fg-muted)" }}>
               Your plan picked up where you left off — nothing to catch up on right now.
@@ -104,7 +104,7 @@ export default function DashboardPage() {
         )}
 
         {overdue.length > 0 && (
-          <div className="mx-6 mt-4 rounded-2xl p-4 flex flex-col gap-3" style={{ background: "var(--amber-bg)" }}>
+          <div className="mx-6 mt-4 rounded-[24px] p-4 flex flex-col gap-3" style={{ background: "var(--amber-bg)" }}>
             <div>
               <p className="text-sm font-bold" style={{ color: "var(--fg-default)" }}>
                 Life happened — {overdue.length} study block{overdue.length > 1 ? "s" : ""} slipped past.
@@ -125,14 +125,21 @@ export default function DashboardPage() {
             {upcomingExams.map(({ s, days }) => (
               <div
                 key={s.id}
-                className="flex-shrink-0 rounded-2xl px-4 py-3 text-center min-w-[92px]"
+                className="flex-shrink-0 rounded-[24px] px-6 py-4 text-center min-w-[140px]"
                 style={{ background: "var(--bg-surface-cream)" }}
               >
-                <div className="text-2xl font-bold" style={{ color: days <= 14 ? "var(--danger-text)" : "var(--ganzy-orange)" }}>
+                <div className="text-xs font-bold uppercase tracking-[0.06em]" style={{ color: "var(--fg-label)" }}>
+                  {s.name}
+                </div>
+                <div
+                  className="text-[48px] leading-[48px] font-bold mt-1"
+                  style={{ color: days <= 14 ? "var(--danger-text)" : "var(--ganzy-orange)" }}
+                >
                   {days}
                 </div>
-                <div className="text-[10px] font-bold uppercase" style={{ color: "var(--fg-subtle)" }}>days</div>
-                <div className="text-xs font-semibold mt-1 truncate" style={{ color: "var(--fg-muted)" }}>{s.name}</div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.06em]" style={{ color: "var(--fg-subtle)" }}>
+                  days left
+                </div>
               </div>
             ))}
           </div>
@@ -143,7 +150,7 @@ export default function DashboardPage() {
         <div className="px-6 mt-4">
           {upNext ? (
             <div
-              className="rounded-2xl p-5"
+              className="rounded-[24px] p-5"
               style={{ background: "var(--ganzy-orange)", boxShadow: "var(--shadow-cta)" }}
             >
               <span className="text-xs font-bold uppercase tracking-[0.06em] text-white/80">
@@ -164,14 +171,14 @@ export default function DashboardPage() {
               </Link>
             </div>
           ) : allDone ? (
-            <div className="rounded-2xl p-5" style={{ background: "var(--bg-surface-cream)" }}>
+            <div className="rounded-[24px] p-5" style={{ background: "var(--bg-surface-cream)" }}>
               <p className="text-lg font-bold" style={{ color: "var(--fg-default)" }}>🌙 You&apos;re done for today.</p>
               <p className="text-sm mt-1" style={{ color: "var(--fg-muted)" }}>
                 Rest is part of the plan — tomorrow starts fresh. Nothing else is expected of you tonight.
               </p>
             </div>
           ) : (
-            <div className="rounded-2xl p-5 border-2 border-dashed" style={{ borderColor: "var(--stone-border-dashed)" }}>
+            <div className="rounded-[24px] p-5 border-2 border-dashed" style={{ borderColor: "var(--stone-border-dashed)" }}>
               <p className="font-bold" style={{ color: "var(--fg-default)" }}>Nothing scheduled right now.</p>
               <p className="text-sm mt-1" style={{ color: "var(--fg-muted)" }}>
                 You&apos;re free until your next block. Want to get ahead?
@@ -182,7 +189,7 @@ export default function DashboardPage() {
 
         {todaysBlocks.length > 0 && (
           <div className="px-6 mt-5">
-            <div className="rounded-2xl p-4 border" style={{ borderColor: "var(--stone-border)" }}>
+            <div className="rounded-[24px] p-4 border" style={{ borderColor: "var(--stone-border)" }}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-bold" style={{ color: "var(--fg-default)" }}>Today&apos;s progress</span>
                 <span className="text-xs font-bold" style={{ color: "var(--fg-subtle)" }}>

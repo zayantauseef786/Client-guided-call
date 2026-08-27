@@ -1,34 +1,75 @@
 @import "tailwindcss";
 
+/* =========================================================
+   Ganzy Design System — ported verbatim from the design
+   handoff's colors_and_type.nofont.css, plus a dark-mode
+   layer from the same design's Rebuild Spec (the raw token
+   file only ships light mode).
+   ========================================================= */
 :root {
-  /* ---- Light mode (default) ---- */
-  --ganzy-orange: #e8720a;
-  --ganzy-orange-hover: #b85a00;
-  --ganzy-orange-soft: rgba(232, 114, 10, 0.1);
-  --ganzy-orange-ring: rgba(255, 130, 16, 0.28);
+  /* Primary — Ganzy Orange */
+  --ganzy-orange: #ff8210;
+  --ganzy-orange-600: #f97316;
+  --ganzy-orange-700: #ea580c;
+  --ganzy-orange-900: #964900;
+  --ganzy-orange-50: #fff8f2;
+  --ganzy-orange-100: #ffedd5;
+  --ganzy-orange-200: #fed7aa;
+  --ganzy-orange-tint-10: rgba(255, 130, 16, 0.1);
+  --ganzy-orange-tint-30: rgba(255, 130, 16, 0.3);
+  --ganzy-orange-tint-05: rgba(255, 130, 16, 0.05);
 
-  --fg-default: #1a1c1c;
-  --fg-label: #574235;
-  --fg-muted: #605e5a;
-  --fg-subtle: #6b7280;
-  --fg-on-accent: #ffffff;
-
-  --bg-page: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-surface-cream: #fff8f2;
-  --bg-canvas: #f7f3ee;
-  --bg-canvas-2: #f3ede4;
-  --bg-canvas-3: #ede8e1;
-
+  /* Warm neutrals (stone) */
+  --stone-cream: #f7f3ee;
+  --stone-cream-2: #f3ede4;
   --stone-border: #ede8e1;
   --stone-border-2: #e6e2dd;
-  --stone-border-dashed: #e7e5e4;
+  --stone-border-3: #e7e5e4;
 
-  --success-fill: #22c55e;
-  --success-text: #16a34a;
+  /* Cool neutrals */
+  --neutral-100: #f3f4f6;
+  --neutral-150: #f3f3f4;
+  --neutral-200: #e4e4e7;
+
+  /* Text ink */
+  --ink-900: #1a1c1c;
+  --ink-700: #574235;
+  --ink-600: #605e5a;
+  --ink-500: #6b7280;
+
+  /* Semantic */
+  --success: #16bb83;
+  --success-dark: #006c49;
+  --success-tint-10: rgba(22, 187, 131, 0.1);
+  --success-tint-20: rgba(22, 187, 131, 0.2);
+  --info-blue: #3b82f6;
+  --warning-amber: #f59e0b;
+  --danger-red: #ef4444;
+
+  --fg-default: var(--ink-900);
+  --fg-muted: var(--ink-600);
+  --fg-subtle: var(--ink-500);
+  --fg-label: var(--ink-700);
+  --fg-on-accent: #ffffff;
+  --fg-accent: var(--ganzy-orange);
+  --fg-accent-strong: var(--ganzy-orange-700);
+
+  --bg-page: #ffffff;
+  --bg-canvas: var(--neutral-150);
+  --bg-surface: #ffffff;
+  --bg-surface-warm: var(--stone-cream);
+  --bg-surface-cream: var(--ganzy-orange-50);
+  --bg-accent: var(--ganzy-orange);
+  --bg-accent-soft: var(--ganzy-orange-tint-10);
+
+  --stone-border-dashed: var(--stone-border-3);
+  --ganzy-orange-hover: var(--ganzy-orange-700);
+  --ganzy-orange-soft: var(--ganzy-orange-tint-10);
+  --ganzy-orange-ring: rgba(255, 130, 16, 0.3);
+  --success-fill: var(--success);
+  --success-text: var(--success-dark);
   --ahead-fill: #22d97a;
   --ahead-text: #047857;
-  --info-blue: #1d4ed8;
   --amber-text: #92620a;
   --amber-bg: rgba(245, 158, 11, 0.15);
   --danger-text: #b42318;
@@ -36,13 +77,18 @@
 
   --shadow-rest: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-card: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-pop: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   --shadow-cta: 0 4px 6px -4px rgba(194, 87, 10, 0.3), 0 10px 15px -3px rgba(194, 87, 10, 0.25);
   --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-nav: 0 -4px 20px 0 rgba(0, 0, 0, 0.05);
+  --ring-focus: 0 0 0 3px rgba(255, 130, 16, 0.3);
 
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Dark mode — neutral gray-black per the design's dark-mode spec (not part of
+   the light-only token export), with the brand orange intentionally lightened
+   for contrast on dark surfaces. */
 :root[data-theme="dark"] {
   --ganzy-orange: #ff9a40;
   --ganzy-orange-hover: #ffb066;
@@ -59,8 +105,6 @@
   --bg-surface: #2e2e2e;
   --bg-surface-cream: #333333;
   --bg-canvas: #242424;
-  --bg-canvas-2: #262626;
-  --bg-canvas-3: #303030;
 
   --stone-border: #383838;
   --stone-border-2: #484848;
@@ -76,8 +120,6 @@
   --danger-text: #fca5a5;
   --danger-bg: rgba(239, 68, 68, 0.16);
 
-  --shadow-rest: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 4px 6px -4px rgba(0, 0, 0, 0.4);
   --shadow-cta: 0 4px 6px -4px rgba(0, 0, 0, 0.5), 0 10px 15px -3px rgba(0, 0, 0, 0.4);
   --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   --shadow-nav: 0 -4px 20px 0 rgba(0, 0, 0, 0.3);

@@ -72,7 +72,7 @@ export default function PlanPage() {
   if (!hydrated) return null;
 
   return (
-    <AppShell topBar={<TopBar title="Plan" />}>
+    <AppShell topBar={<TopBar />}>
       <FeasibilityBar feasibility={feasibility} onRecalibrate={recalibrate} />
 
       <div className="px-6 mt-4 pb-24 flex flex-col gap-5">
