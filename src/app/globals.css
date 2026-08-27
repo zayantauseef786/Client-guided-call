@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  /* ---- Light mode (default) ---- */
+  --ganzy-orange: #e8720a;
+  --ganzy-orange-hover: #b85a00;
+  --ganzy-orange-soft: rgba(232, 114, 10, 0.1);
+  --ganzy-orange-ring: rgba(255, 130, 16, 0.28);
+
+  --fg-default: #1a1c1c;
+  --fg-label: #574235;
+  --fg-muted: #605e5a;
+  --fg-subtle: #6b7280;
+  --fg-on-accent: #ffffff;
+
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-cream: #fff8f2;
+  --bg-canvas: #f7f3ee;
+  --bg-canvas-2: #f3ede4;
+  --bg-canvas-3: #ede8e1;
+
+  --stone-border: #ede8e1;
+  --stone-border-2: #e6e2dd;
+  --stone-border-dashed: #e7e5e4;
+
+  --success-fill: #22c55e;
+  --success-text: #16a34a;
+  --ahead-fill: #22d97a;
+  --ahead-text: #047857;
+  --info-blue: #1d4ed8;
+  --amber-text: #92620a;
+  --amber-bg: rgba(245, 158, 11, 0.15);
+  --danger-text: #b42318;
+  --danger-bg: rgba(239, 68, 68, 0.1);
+
+  --shadow-rest: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-cta: 0 4px 6px -4px rgba(194, 87, 10, 0.3), 0 10px 15px -3px rgba(194, 87, 10, 0.25);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-nav: 0 -4px 20px 0 rgba(0, 0, 0, 0.05);
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --ganzy-orange: #ff9a40;
+  --ganzy-orange-hover: #ffb066;
+  --ganzy-orange-soft: rgba(255, 154, 64, 0.16);
+  --ganzy-orange-ring: rgba(255, 154, 64, 0.3);
+
+  --fg-default: #ececec;
+  --fg-label: #c9c9c9;
+  --fg-muted: #b0b0b0;
+  --fg-subtle: #9e9e9e;
+  --fg-on-accent: #1a1c1c;
+
+  --bg-page: #292929;
+  --bg-surface: #2e2e2e;
+  --bg-surface-cream: #333333;
+  --bg-canvas: #242424;
+  --bg-canvas-2: #262626;
+  --bg-canvas-3: #303030;
+
+  --stone-border: #383838;
+  --stone-border-2: #484848;
+  --stone-border-dashed: #565656;
+
+  --success-fill: #34d399;
+  --success-text: #34d399;
+  --ahead-fill: #34d399;
+  --ahead-text: #6ee7b7;
+  --info-blue: #93c5fd;
+  --amber-text: #fbbf24;
+  --amber-bg: rgba(245, 158, 11, 0.18);
+  --danger-text: #fca5a5;
+  --danger-bg: rgba(239, 68, 68, 0.16);
+
+  --shadow-rest: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-cta: 0 4px 6px -4px rgba(0, 0, 0, 0.5), 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  --shadow-nav: 0 -4px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-canvas);
+  color: var(--fg-default);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--ganzy-orange-soft);
+}
+
+@supports (padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+}
