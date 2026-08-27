@@ -15,7 +15,9 @@ interface Props {
 export default function SignUpStep({ name, email, age13Confirmed, onChange, onContinue }: Props) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [password, setPassword] = useState("");
-  const valid = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && password.length >= 6 && age13Confirmed;
+  // Cosmetic sign-up only — no real auth backend, so we just need enough
+  // filled in for the screen to feel real, not strict credential checks.
+  const valid = name.trim().length > 1 && email.trim().length > 3 && age13Confirmed;
 
   return (
     <div className="px-6 pb-8 flex flex-col gap-5">
